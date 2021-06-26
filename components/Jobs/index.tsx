@@ -13,13 +13,12 @@ export default function Jobs () {
 		const res = await fetch('https://kndwin-jobs.up.railway.app/jobs') 
 		const data = await res.json()
 		console.log({ data })
-		const totalJobs = []
-		data.map((job: any) => {
+		const totalJobs = data.map((job: any) => {
 			const stack = ['node', 'react', 'javascript', 'typescript', 'python', 'c++', 'bash'
 				, 'c#', '.net', 'vue', 'php', 'aws'
 			]
 			const stackFromJob = stack.filter(tech => job.descriptionHTML.toLowerCase().includes(tech))
-			totalJobs.push({ ...job, stack: stackFromJob })
+			return ({ ...job, stack: stackFromJob })
 		})
 		setJobs(totalJobs)
 	}
