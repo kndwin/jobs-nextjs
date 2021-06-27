@@ -1,8 +1,9 @@
 import { Pagination, Modal, Row, Badge, Link, Button, Fieldset, Grid, Tag, Text } from "@geist-ui/react";
 import { Clock  } from '@geist-ui/react-icons'
 import {useEffect, useState} from "react";
+
 export default function Jobs () {
-	const [jobs, setJobs] = useState([])
+	const [jobs, setJobs] = useState<any[]>([])
 	const [modal, setModal] = useState(false)
 	const [description, setDescription] = useState('')
 	const [company, setCompany] = useState('')
@@ -14,8 +15,9 @@ export default function Jobs () {
 		const data = await res.json()
 		console.log({ data })
 		const totalJobs = data.map((job: any) => {
-			const stack = ['node', 'react', 'javascript', 'typescript', 'python', 'c++', 'bash'
-				, 'c#', '.net', 'vue', 'php', 'aws'
+			const stack: string[] = ['node', 'react', 'javascript', 
+				'typescript', 'python', 'c++', 'bash', 
+				'c#', '.net', 'vue', 'php', 'aws'
 			]
 			const stackFromJob = stack.filter(tech => job.descriptionHTML.toLowerCase().includes(tech))
 			return ({ ...job, stack: stackFromJob })
@@ -60,6 +62,7 @@ export default function Jobs () {
 								</Text>
 							</Row>
 						</Fieldset.Subtitle>
+						
 						{stack.map((tech: string) => (
 							<Badge key={tech} style={{ margin: '1em 1em 0 0'}}>
 								{tech}
