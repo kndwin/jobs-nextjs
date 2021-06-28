@@ -1,11 +1,10 @@
-import { Text, Input } from '@geist-ui/react'
-import {useState} from 'react'
+import { Input } from '@geist-ui/react'
+import { useState } from 'react'
 import Fuse from 'fuse.js'
 import { Search } from '@geist-ui/react-icons'
 
 import { Layout, Jobs } from 'components'
-import { Job } from 'type'
-import {useJobsStore} from 'store'
+import { useJobsStore } from 'store'
 
 export default function Home() {
 	const { jobs, setJobs } = useJobsStore()
@@ -27,15 +26,15 @@ export default function Home() {
 				keys: [`title`]
 			})
 
-			const filteredFilmsTitles = fuse.search(searchTerm)
+			const filteredJobsTitles = fuse.search(searchTerm)
 				.map( ({ item }) =>  item.title)
 
-			if (filteredFilmsTitles.length == 0 ) {
+			if (filteredJobsTitles.length == 0 ) {
 				setSearchMessage('😢 No Search found')
 			}
 
 			const updatedJobsVisibility = jobs.map((film) => {
-				const isVisible = filteredFilmsTitles.includes(film.title)
+				const isVisible = filteredJobsTitles.includes(film.title)
 				return {...film, isVisible}
 			})
 
