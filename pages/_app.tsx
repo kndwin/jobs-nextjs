@@ -1,4 +1,5 @@
 import type { AppProps } from 'next/app'
+import { Provider } from 'next-auth/client'
 import { GeistProvider, CssBaseline, Themes, GeistUIThemesBreakpoints
 } from '@geist-ui/react'
 
@@ -17,9 +18,11 @@ export default function App({ Component, pageProps }: AppProps) {
 	})
 
 	return (
-		<GeistProvider themes={[myTheme]} themeType="myTheme">
-			<CssBaseline />
-			<Component {...pageProps} />
-		</GeistProvider>
+		<Provider>
+			<GeistProvider themes={[myTheme]} themeType="myTheme">
+				<CssBaseline />
+				<Component {...pageProps} />
+			</GeistProvider>
+		</Provider>
 	)
 }
