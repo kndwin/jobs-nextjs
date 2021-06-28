@@ -47,8 +47,13 @@ export default function Layout({ children }: LayoutProps): ReactElement | null {
 					</Button>
 				</>}
 				{session && <>
-					Signed in as {session.user.email} <br/>
-			<Button onClick={() => signOut()}>Sign out</Button>
+					Signed in as {session?.user?.email} <br/>
+					<Button 
+						auto
+						ghost
+						size='medium'
+						type='secondary'
+						onClick={() => signOut()}>Sign out</Button>
     </>}
 			</Page.Header>
 			<Page.Content style={{ paddingTop: '0.5em'}}>
